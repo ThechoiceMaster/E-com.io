@@ -52,7 +52,7 @@ const AddProduct = (props) => {
                   name="name"
                   id="title"
                   className="w-full h-12 bg-transparent pl-5 outline-none"
-                  placeholder="ชื่อสินค้า"
+                  placeholder="ชื่อบทความ"
                 />
               </div>
               <div className="h-12 w-full border rounded-lg mb-10 mr-5">

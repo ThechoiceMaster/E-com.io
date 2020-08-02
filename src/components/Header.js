@@ -1,11 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import * as loginActions from "./../actions/login.action";
+import Menu from "./Menu";
 
-export default function Header() {
+const Header = (props) => {
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <nav className="bg-teal-500">
+    <div className="flex items-center justify-between flex-wrap  py-6 lg:container mx-auto">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <span className="font-semibold text-xl tracking-tight">E-com</span>
+        <span className="font-semibold text-4xl tracking-tight">BlogSanook</span>
       </div>
       <div className="block lg:hidden">
         <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
@@ -26,33 +29,40 @@ export default function Header() {
               href="#responsive-header"
               className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
             >
-              Home
+              หน้าแรก
             </a>
           </Link>
           <a
             href="#responsive-header"
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >
-            Examples
+            ค้นหา
           </a>
           <Link to="/add">
-          <a
-            href="#responsive-header"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-          >
-            Blog
-          </a> </Link>
+            <a
+              href="#responsive-header"
+              className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
+            >
+              เขียน
+            </a>{" "}
+          </Link>
         </div>
         <div>
           <div>
-            <Link to="/login">
-              <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
-                Login
-              </a>
-            </Link>
+            {loginActions.isLoggedIn() ? (
+              <Menu />
+            ) : (
+              <Link to="/login">
+                <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+                  Login
+                </a>
+              </Link>
+            )}
           </div>
         </div>
       </div>
+    </div>
     </nav>
   );
-}
+};
+export default withRouter(Header);

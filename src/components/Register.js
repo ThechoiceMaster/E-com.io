@@ -1,24 +1,46 @@
 import React, { useState } from "react";
-import * as loginAction from "./../actions/login.action";
 import { useDispatch } from "react-redux";
+import * as registerAction from "./../actions/register.action";
 import { Link } from "react-router-dom";
 
-export default function Login(props) {
-  const dispatch = useDispatch();
+export default function Register(props) {
   const [Account, setAccount] = useState({
     username: "",
+    email: "",
     password: "",
   });
+  const dispatch = useDispatch();
   return (
     <div className="flex mt-20 justify-center">
       <div className="shadow-lg w-1/2 flex justify-center">
         <form
-          className="bg-white rounded px-20 pt-6 pb-8 mb-1 w-full"
+          className="bg-white rounded  m-20 w-full"
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(loginAction.login({ ...Account, ...props }));
+            dispatch(registerAction.register({ ...Account, ...props }));
           }}
         >
+          <div className="mb-10">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="email"
+              placeholder="email"
+              value={Account.email}
+              onChange={(e) => {
+                setAccount({
+                  ...Account,
+                  email: e.target.value,
+                });
+              }}
+            />
+          </div>
           <div className="mb-10">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -60,20 +82,17 @@ export default function Login(props) {
                 });
               }}
             />
-            <h1 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 cursor-pointer">
-              ลืมรหัสผ่าน?
-            </h1>
           </div>
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              เข้าสู่ระบบ
+              สมัคสมาชิค
             </button>
-            <Link to="/register">
+            <Link to="/login">
               <h1 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 cursor-pointer">
-                สมัคสมาชิค?
+                เข้าสู่ระบบ?
               </h1>
             </Link>
           </div>

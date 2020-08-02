@@ -18,11 +18,12 @@ export const setAddToFai = () => ({
   type: ADD_PRODUCT_FAILED,
 });
 
-export const addProduct = ({ name, stock, price, img, detail }) => {
+export const addProduct = ({ username, name, stock, price, img, detail }) => {
   return async (dispatch) => {
     dispatch(setAddToFet());
     try {
       let result = await httpClient.post(server.ADD_URL, {
+        username,
         name,
         stock,
         price,
